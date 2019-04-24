@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="Yiming Li">
+		<script src="lib/htmlwidgets-0.5/htmlwidgets.js"></script>
+		<script src="lib/plotlyjs-1.0.0/plotly-latest.min.js"></script>
+		<script src="lib/plotly-binding-2.0.3/plotly.js"></script>
+		<script src="lib/jquery-latest.js"></script>
+	    <script>
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	    ga('create', 'UA-38645311-2', 'auto');
+	    ga('send', 'pageview');
+	    </script>
+		<title>Simulation Results Visualization</title>
+		<!-- Bootstrap core CSS -->
+		<link href="lib/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="vis-main.html">Simulation Results Visualization</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="vis-by-h2.html">Fix # of causal SNPs, vary heritability<span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="vis-by-noc.html">Fix heritability, vary # of causal SNPs</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+
+<div class="page-header">
+<h1 id="navbar">Performances of different GRIP methods as the number of causal SNPs changes</h1>
+<p class="lead">
+	<ul class="lead">
+		<li>Generally speaking, when the number of causal SNPs decreases, we would become better at GRIP.</li>
+		<li>It seems that a disease's degree of polygenicity does not affect the difficulty of GRIP as much as its heritability (which is kind of expected).</li>
+	</ul>
+	<ul class="lead">
+		<li>Note that the total number of SNPs in the simulation is 27059. Hence &ndash;
+		<ul class="lead">
+			<li>10 causal SNPs &cong; 0.0370%</li>
+			<li>100 causal SNPs &cong; 0.3700%</li>
+			<li>500 causal SNPs &cong; 1.8478%</li>
+		</ul>
+		</li>
+	</ul>
+</p>
+</div>
+
+<form class="form-horizontal">
+<fieldset>
+<div class="form-group">
+<label for="select" class="col-lg-2 control-label">Heritability: </label>
+<div class="col-lg-2">
+<select class="form-control" id="dropdown">
+<option value="empty">Please select...</option>
+<option value="h01">0.1</option>
+<option value="h03">0.3</option>
+<option value="h06">0.6</option>
+<option value="h09">0.9</option>
+</select>
+</div>
+</div>
+</fieldset>
+</form>
+
+</div>
+</div>
+</div>
+
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+<br>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#h01").hide();
+	$("#h03").hide();
+	$("#h06").hide();
+	$("#h09").hide();
+    $('#dropdown').on('change', function() {
+      if ( this.value == 'empty') {
+        $("#h01").hide();
+        $("#h03").hide();
+        $("#h06").hide();
+        $("#h09").hide();
+      }
+      if ( this.value == 'h01') {
+        $("#h01").show();
+      } else {
+        $("#h01").hide();
+      }
+      if ( this.value == 'h03') {
+        $("#h03").show();
+      } else {
+        $("#h03").hide();
+      }
+      if ( this.value == 'h06') {
+        $("#h06").show();
+      } else {
+        $("#h06").hide();
+      }
+      if ( this.value == 'h09') {
+        $("#h09").show();
+      } else {
+        $("#h09").hide();
+      }
+    });
+});
+</script>
+
+<div id="h01" style="width:1100px;height:600px;" class="plotly"></div>
+<script type="application/json" data-for="h01">{"x":{"data":[{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.5951354819,0.5269300164,0.5645219209],"mode":"markers+lines","showlegend":true,"name":"No pre-processing","marker":{"color":"#66C2A5"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.673497607,0.5637658413,0.595134974],"mode":"markers+lines","showlegend":true,"name":"Only thresholding","marker":{"color":"#E49C71"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.6656899644,0.5910211314,0.6091783131],"mode":"markers+lines","showlegend":true,"name":"Thresholding + pruning (best case)","marker":{"color":"#C9999D"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.5921135684,0.5692139201,0.5611597974],"mode":"markers+lines","showlegend":true,"name":"Thresholding + pruning (worst case)","marker":{"color":"#AF9AC8"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.6656922132,0.5749614976,0.6063746233],"mode":"markers+lines","showlegend":true,"name":"Thresholding + clumping (best case)","marker":{"color":"#E294B8"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.6192466011,0.5587864584,0.58829057],"mode":"markers+lines","showlegend":true,"name":"Thresholding + clumping (worst case)","marker":{"color":"#B0D163"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.6681987161,0.5689487848,0.5546463225],"mode":"markers+lines","showlegend":true,"name":"LASSO","marker":{"color":"#E3D93E"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.5968,0.53349,0.56546],"mode":"markers+lines","showlegend":true,"name":"LDpred-inf","marker":{"color":"#F5CF64"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.66224,0.53277,0.57226],"mode":"markers+lines","showlegend":true,"name":"LDpred (p = 0.1)","marker":{"color":"#DBC09B"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.67307,0.56773,0.55622],"mode":"markers+lines","showlegend":true,"name":"LDpred (p = 0.0001)","marker":{"color":"#B3B3B3"}}],"layout":{"yaxis":{"range":[0.52,0.95],"title":"AUC"},"xaxis":{"title":"noCausal"},"margin":{"b":40,"l":60,"t":25,"r":10}},"url":{},"width":{},"height":{},"layout.1":{"yaxis":{"range":[0.52,0.95],"title":"AUC"},"xaxis":{"title":"noCausal"}},"filename":"noCausal vs. AUC"},"evals":[]}</script>
+<script type="application/htmlwidget-sizing" data-for="h01">{"viewer":{"width":450,"height":350,"padding":5,"fill":false},"browser":{"width":1100,"height":600,"padding":50,"fill":true}}</script>
+
+<div id="h03" style="width:1100px;height:600px;" class="plotly"></div>
+<script type="application/json" data-for="h03">{"x":{"data":[{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.6116133333,0.5941384988,0.5904625046],"mode":"markers+lines","showlegend":true,"name":"No pre-processing","marker":{"color":"#66C2A5"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.7212422222,0.6318369972,0.5912068369],"mode":"markers+lines","showlegend":true,"name":"Only thresholding","marker":{"color":"#E49C71"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.7070488889,0.634113522,0.6217632673],"mode":"markers+lines","showlegend":true,"name":"Thresholding + pruning (best case)","marker":{"color":"#C9999D"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.6253244444,0.6063470567,0.5914484265],"mode":"markers+lines","showlegend":true,"name":"Thresholding + pruning (worst case)","marker":{"color":"#AF9AC8"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.7265288889,0.6616199039,0.6343277926],"mode":"markers+lines","showlegend":true,"name":"Thresholding + clumping (best case)","marker":{"color":"#E294B8"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.70892,0.6436393221,0.6242724407],"mode":"markers+lines","showlegend":true,"name":"Thresholding + clumping (worst case)","marker":{"color":"#B0D163"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.7633911111,0.6540137421,0.5920194881],"mode":"markers+lines","showlegend":true,"name":"LASSO","marker":{"color":"#E3D93E"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.62128,0.60736,0.61306],"mode":"markers+lines","showlegend":true,"name":"LDpred-inf","marker":{"color":"#F5CF64"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.69576,0.64683,0.60619],"mode":"markers+lines","showlegend":true,"name":"LDpred (p = 0.1)","marker":{"color":"#DBC09B"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.73538,0.61078,0.56539],"mode":"markers+lines","showlegend":true,"name":"LDpred (p = 0.0001)","marker":{"color":"#B3B3B3"}}],"layout":{"yaxis":{"range":[0.52,0.95],"title":"AUC"},"xaxis":{"title":"noCausal"},"margin":{"b":40,"l":60,"t":25,"r":10}},"url":{},"width":{},"height":{},"layout.1":{"yaxis":{"range":[0.52,0.95],"title":"AUC"},"xaxis":{"title":"noCausal"}},"filename":"noCausal vs. AUC"},"evals":[]}</script>
+<script type="application/htmlwidget-sizing" data-for="h03">{"viewer":{"width":450,"height":350,"padding":5,"fill":true},"browser":{"width":1100,"height":600,"padding":50,"fill":true}}</script>
+
+<div id="h06" style="width:1100px;height:600px;" class="plotly"></div>
+<script type="application/json" data-for="h06">{"x":{"data":[{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.7695330502,0.720014797,0.7062397619],"mode":"markers+lines","showlegend":true,"name":"No pre-processing","marker":{"color":"#66C2A5"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.8183155783,0.7740146399,0.7069117983],"mode":"markers+lines","showlegend":true,"name":"Only thresholding","marker":{"color":"#E49C71"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.8311935022,0.7880407577,0.7745487574],"mode":"markers+lines","showlegend":true,"name":"Thresholding + pruning (best case)","marker":{"color":"#C9999D"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.7054059462,0.6559679523,0.652564253],"mode":"markers+lines","showlegend":true,"name":"Thresholding + pruning (worst case)","marker":{"color":"#AF9AC8"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.8391217374,0.7934613419,0.7730140604],"mode":"markers+lines","showlegend":true,"name":"Thresholding + clumping (best case)","marker":{"color":"#E294B8"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.8236785124,0.7856958988,0.7578224368],"mode":"markers+lines","showlegend":true,"name":"Thresholding + clumping (worst case)","marker":{"color":"#B0D163"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.9035740081,0.8295817824,0.7878196142],"mode":"markers+lines","showlegend":true,"name":"LASSO","marker":{"color":"#E3D93E"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.7806,0.73585,0.73835],"mode":"markers+lines","showlegend":true,"name":"LDpred-inf","marker":{"color":"#F5CF64"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.83071,0.77715,0.74616],"mode":"markers+lines","showlegend":true,"name":"LDpred (p = 0.1)","marker":{"color":"#DBC09B"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.82902,0.74277,0.68617],"mode":"markers+lines","showlegend":true,"name":"LDpred (p = 0.0001)","marker":{"color":"#B3B3B3"}}],"layout":{"yaxis":{"range":[0.52,0.95],"title":"AUC"},"xaxis":{"title":"noCausal"},"margin":{"b":40,"l":60,"t":25,"r":10}},"url":{},"width":{},"height":{},"layout.1":{"yaxis":{"range":[0.52,0.95],"title":"AUC"},"xaxis":{"title":"noCausal"}},"filename":"noCausal vs. AUC"},"evals":[]}</script>
+<script type="application/htmlwidget-sizing" data-for="h06">{"viewer":{"width":450,"height":350,"padding":5,"fill":true},"browser":{"width":1100,"height":600,"padding":50,"fill":true}}</script>
+
+<div id="h09" style="width:1100px;height:600px;" class="plotly"></div>
+<script type="application/json" data-for="h09">{"x":{"data":[{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.695829341,0.7573961195,0.7921924311],"mode":"markers+lines","showlegend":true,"name":"No pre-processing","marker":{"color":"#66C2A5"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.8133832677,0.7887985062,0.7985611425],"mode":"markers+lines","showlegend":true,"name":"Only thresholding","marker":{"color":"#E49C71"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.8633387666,0.812993647,0.8289829903],"mode":"markers+lines","showlegend":true,"name":"Thresholding + pruning (best case)","marker":{"color":"#C9999D"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.7094441241,0.6755151099,0.6695417052],"mode":"markers+lines","showlegend":true,"name":"Thresholding + pruning (worst case)","marker":{"color":"#AF9AC8"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.8575014445,0.8203897665,0.8456608407],"mode":"markers+lines","showlegend":true,"name":"Thresholding + clumping (best case)","marker":{"color":"#E294B8"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.8372769497,0.8072201236,0.8306779747],"mode":"markers+lines","showlegend":true,"name":"Thresholding + clumping (worst case)","marker":{"color":"#B0D163"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.9480972154,0.8909383585,0.8730552751],"mode":"markers+lines","showlegend":true,"name":"LASSO","marker":{"color":"#E3D93E"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.7392,0.77217,0.81661],"mode":"markers+lines","showlegend":true,"name":"LDpred-inf","marker":{"color":"#F5CF64"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.85572,0.81696,0.81454],"mode":"markers+lines","showlegend":true,"name":"LDpred (p = 0.1)","marker":{"color":"#DBC09B"}},{"type":"scatter","inherit":true,"x":[10,100,500],"y":[0.89547,0.76594,0.66956],"mode":"markers+lines","showlegend":true,"name":"LDpred (p = 0.0001)","marker":{"color":"#B3B3B3"}}],"layout":{"yaxis":{"range":[0.52,0.95],"title":"AUC"},"xaxis":{"title":"noCausal"},"margin":{"b":40,"l":60,"t":25,"r":10}},"url":{},"width":{},"height":{},"layout.1":{"yaxis":{"range":[0.52,0.95],"title":"AUC"},"xaxis":{"title":"noCausal"}},"filename":"noCausal vs. AUC"},"evals":[]}</script>
+<script type="application/htmlwidget-sizing" data-for="h09">{"viewer":{"width":450,"height":350,"padding":5,"fill":true},"browser":{"width":1100,"height":600,"padding":50,"fill":true}}</script>
+
+<br><br>
+
+</div>
+</div>
+</div>
+
+<footer>
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+<ul class="list-unstyled">
+<li class="pull-right"><a href="#top">Back to top</a></li>
+<li>&copy; 2015 Yiming Li. All rights reserved.<br><br></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+
+</body>
+</html>

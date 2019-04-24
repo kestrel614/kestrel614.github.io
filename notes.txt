@@ -1,0 +1,12 @@
+Text mining US president speeches	#classProject #textMining #dataVis
+Authorship attribution via word-count-matrix	#classProject #textMining #dataVis
+Visualizing big ranking data	#fyp #dataVis #stats
+Lyrics word count	#fun #textMining
+Data visualization related to Hong Kong: 1. Politics; 2. Districts	#dataVis #fun #hkej
+Globe	#dataVis #fun #hkej
+
+
+
+Drug-target interaction network	#academic #compBio #ml
+Risk prediction: PGS vs shrinkage methods	#statGen #academic
+Johnny	#academic #statGen #dataVis

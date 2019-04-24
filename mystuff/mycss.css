@@ -1,0 +1,35 @@
+/* Space out content a bit */
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+	padding: 14px 24px;
+	font-size: 21px;
+}
+.bg-col0 {
+	background: url("../graphics/cover.jpg");
+}
+.bg-col1 {
+	background: url("../graphics/congruent_pentagon.png");
+}
+.bg-col2 {
+	background: url("../graphics/struckaxiom.png");
+}
+.bg-col3 {
+	background: url("../graphics/graphy.png");
+}
+
+.centeredImage {
+	text-align:center;
+	margin-top:10px;
+	margin-bottom:10px;
+	padding:5px;
+	border-radius:15px;
+}
